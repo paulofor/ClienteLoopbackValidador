@@ -35,16 +35,16 @@ public class RepositorioBase {
 			return "NotificacaoApps";
 		}
 		public void preparaEnvio(NotificacaoApp item, final ObjectCallback<NotificacaoApp> callback) {
-			RestContractItem contrato = new RestContractItem("DispositivoUsuarios/preparaEnvio","POST");
-			this.getRestAdapter().getContract().addItem(contrato, "DispositivoUsuario.preparaEnvio");
+			RestContractItem contrato = new RestContractItem("NotificacaoApps/preparaEnvio","POST");
+			this.getRestAdapter().getContract().addItem(contrato, "NotificacaoApp.preparaEnvio");
 	        Map<String, Object> params = new HashMap<String, Object>();
-	        params.put("notificacao", item);
+	        params.put("notificacao", item.getMap());
 	        invokeStaticMethod("preparaEnvio", params,   new JsonObjectParser<NotificacaoApp>(this, callback));
 			
 		}
 		public void resultadoEnvio(String resultado,  String token, final VoidCallback voidCallback) {
-			RestContractItem contrato = new RestContractItem("DispositivoUsuarios/preparaEnvio","POST");
-			this.getRestAdapter().getContract().addItem(contrato, "DispositivoUsuario.preparaEnvio");
+			RestContractItem contrato = new RestContractItem("NotificacaoApps/resultadoEnvio","POST");
+			this.getRestAdapter().getContract().addItem(contrato, "NotificacaoApp.resultadoEnvio");
 	        Map<String, Object> params = new HashMap<String, Object>();
 	        params.put("resultado", resultado);
 	        params.put("tokenNotificacao" , token);

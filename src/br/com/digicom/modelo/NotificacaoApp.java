@@ -1,5 +1,8 @@
 package br.com.digicom.modelo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.strongloop.android.loopback.Model;
 
 public class NotificacaoApp extends Model{
@@ -11,6 +14,29 @@ public class NotificacaoApp extends Model{
 	private String corpo;
 	private String cor;
 	private String badge;
+	private String tokenFcm;
+	
+	
+	public Map getMap() {
+		Map mapa = new HashMap<String,Object>();
+		if (tokenNotificacao!=null) mapa.put("tokenNotificacao", tokenNotificacao);
+		if (resultadoEnvio!=null) mapa.put("resultadoEnvio", resultadoEnvio);
+		if (tipoEnvio!=null) mapa.put("tipoEnvio", tipoEnvio);
+		if (titulo!=null) mapa.put("titulo", titulo);
+		if (corpo!=null) mapa.put("corpo", corpo);
+		if (cor!=null) mapa.put("cor", cor);
+		if (badge!=null) mapa.put("badge", badge);
+		if (tokenFcm!=null) mapa.put("tokenFcm", tokenFcm);
+		return mapa;
+	}
+	
+	
+	public String getTokenFcm() {
+		return tokenFcm;
+	}
+	public void setTokenFcm(String tokenFcm) {
+		this.tokenFcm = tokenFcm;
+	}
 	public String getTokenNotificacao() {
 		return tokenNotificacao;
 	}
