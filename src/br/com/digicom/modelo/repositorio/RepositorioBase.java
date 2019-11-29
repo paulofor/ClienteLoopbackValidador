@@ -8,7 +8,9 @@ import java.util.Map;
 import com.strongloop.android.loopback.ModelRepository;
 import com.strongloop.android.loopback.callbacks.EmptyResponseParser;
 import com.strongloop.android.loopback.callbacks.JsonArrayParser;
+import com.strongloop.android.loopback.callbacks.JsonObjectParser;
 import com.strongloop.android.loopback.callbacks.ListCallback;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.RestContractItem;
 
@@ -17,10 +19,40 @@ import br.com.digicom.modelo.CampanhaAds;
 import br.com.digicom.modelo.CampanhaAnuncioResultado;
 import br.com.digicom.modelo.CampanhaPalavraChaveResultado;
 import br.com.digicom.modelo.DispositivoUsuario;
+import br.com.digicom.modelo.NotificacaoApp;
 import br.com.digicom.modelo.PalavraChaveEstatistica;
 import br.com.digicom.modelo.PalavraChaveRaiz;
 
 public class RepositorioBase {
+	
+	
+	public static class NotificacaoAppRepository extends ModelRepository<NotificacaoApp> {
+		public NotificacaoAppRepository() {
+			super("NotificacaoApp", NotificacaoApp.class);
+		}
+		@Override
+		protected String verificaNomeUrl(String nome) {
+			return "NotificacaoApps";
+		}
+		public void preparaEnvio(NotificacaoApp item, final ObjectCallback<NotificacaoApp> callback) {
+			RestContractItem contrato = new RestContractItem("DispositivoUsuarios/preparaEnvio","POST");
+			this.getRestAdapter().getContract().addItem(contrato, "DispositivoUsuario.preparaEnvio");
+	        Map<String, Object> params = new HashMap<String, Object>();
+	        params.put("notificacao", item);
+	        invokeStaticMethod("preparaEnvio", params,   new JsonObjectParser<NotificacaoApp>(this, callback));
+			
+		}
+		public void resultadoEnvio(String resultado,  String token, final VoidCallback voidCallback) {
+			RestContractItem contrato = new RestContractItem("DispositivoUsuarios/preparaEnvio","POST");
+			this.getRestAdapter().getContract().addItem(contrato, "DispositivoUsuario.preparaEnvio");
+	        Map<String, Object> params = new HashMap<String, Object>();
+	        params.put("resultado", resultado);
+	        params.put("tokenNotificacao" , token);
+	        invokeStaticMethod("resultadoEnvio", params,  new EmptyResponseParser(voidCallback));
+			
+		}
+	}
+	
 	
 	
 	public static class DispositivoUsuarioRepository extends ModelRepository<DispositivoUsuario> {
