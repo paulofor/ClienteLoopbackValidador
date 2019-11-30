@@ -31,12 +31,19 @@ public class NotificacaoApp extends Model{
 	}
 	
 	
+	
 	public String getTokenFcm() {
 		return tokenFcm;
 	}
+
+
+
 	public void setTokenFcm(String tokenFcm) {
 		this.tokenFcm = tokenFcm;
 	}
+
+
+
 	public String getTokenNotificacao() {
 		return tokenNotificacao;
 	}
