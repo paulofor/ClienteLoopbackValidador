@@ -15,7 +15,8 @@ public class NotificacaoApp extends Model{
 	private String cor;
 	private String badge;
 	private String tokenFcm;
-	
+	private Integer projetoMySqlId;
+	private String erroEnvio;
 	
 	public Map getMap() {
 		Map mapa = new HashMap<String,Object>();
@@ -27,6 +28,8 @@ public class NotificacaoApp extends Model{
 		if (cor!=null) mapa.put("cor", cor);
 		if (badge!=null) mapa.put("badge", badge);
 		if (tokenFcm!=null) mapa.put("tokenFcm", tokenFcm);
+		if (projetoMySqlId!=null) mapa.put("projetoMySqlId" , projetoMySqlId);
+		if (erroEnvio!=null) mapa.put("erroEnvio", erroEnvio);
 		return mapa;
 	}
 	
@@ -40,6 +43,18 @@ public class NotificacaoApp extends Model{
 
 	public void setTokenFcm(String tokenFcm) {
 		this.tokenFcm = tokenFcm;
+	}
+
+
+
+	public String getErroEnvio() {
+		return erroEnvio;
+	}
+
+
+
+	public void setErroEnvio(String erroEnvio) {
+		this.erroEnvio = erroEnvio;
 	}
 
 
@@ -85,6 +100,14 @@ public class NotificacaoApp extends Model{
 	}
 	public void setBadge(String badge) {
 		this.badge = badge;
+	}
+
+	public Integer getProjetoMySqlId() {
+		return projetoMySqlId;
+	}
+
+	public void setProjetoMySqlId(Integer projetoMySqlId) {
+		this.projetoMySqlId = projetoMySqlId;
 	}
 	
 
